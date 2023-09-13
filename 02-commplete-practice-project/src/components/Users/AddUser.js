@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Button from '../UI/Button';
 import Card from '../UI/Card';
 import ErrorModal from '../UI/ErrorModal';
 
 import classes from './AddUser.module.css';
+import Helper from '../Helpers/Helper';
 
 const AddUser = (props) => {
   const [enteredUsername, setEnteredUsername] = useState('');
   const [enteredAge, setEnteredAge] = useState('');
   const [error, setError] = useState();
+  //... ref read infor from DOM
+  const uname = useRef();
+  const uage = useRef();
+  //...
 
   const usernameChangeHandler = (event) => {
     setEnteredUsername(event.target.value);
@@ -34,10 +39,14 @@ const AddUser = (props) => {
       });
       return;
     }
+
     props.onAddUser({
       id: Math.random().toString(),
-      username: enteredUsername,
-      age: enteredAge,
+      // username: enteredUsername,
+      username: uname.current.value,
+      // age: enteredAge,
+      age: uage.current.value,
+      // });
     });
 
     setEnteredUsername('');
@@ -49,7 +58,7 @@ const AddUser = (props) => {
     setError(null);
   };
   return (
-    <div>
+    <Helper>
       {error && (
         <ErrorModal
           title={error.title}
@@ -65,6 +74,7 @@ const AddUser = (props) => {
             type="text"
             value={enteredUsername}
             onChange={usernameChangeHandler}
+            ref={uname}
           />
           <label htmlFor="age">Age(years)</label>
           <input
@@ -72,12 +82,13 @@ const AddUser = (props) => {
             type="number"
             value={enteredAge}
             onChange={ageChangeHandler}
+            ref={uage}
           />
 
           <Button type="submit">Add User</Button>
         </form>
       </Card>
-    </div>
+    </Helper>
   );
 };
 
