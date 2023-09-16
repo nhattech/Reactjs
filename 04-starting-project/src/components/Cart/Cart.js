@@ -12,7 +12,7 @@ const Cart = (props) => {
           price: 35.62,
         },
       ].map((item) => {
-        return <li>{item.name}</li>;
+        return <li key={item.id}>{item.name}</li>;
       })}
     </ul>
   );
