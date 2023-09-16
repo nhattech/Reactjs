@@ -8,7 +8,7 @@ const CartProvider = (props) => {
     console.log('Remove Item');
   };
   const cartContext = {
-    item: [],
+    items: [],
     totalAmount: 0,
     addItem: addItemHandler,
     removeItem: removeItemHandler,
