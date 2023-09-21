@@ -50,7 +50,7 @@ const BasicForm = (props) => {
 
   const submitFormHandler = (event) => {
     event.preventDefault();
-    if (formIsValid) {
+    if (!formIsValid) {
       return;
     }
 
