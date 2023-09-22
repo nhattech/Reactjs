@@ -17,6 +17,12 @@
   font-size: xx-large;
 }
 
+.error {
+  text-align: center;
+  color: red;
+  font-size: medium;
+}
+
 @keyframes meals-appear {
   from {
     opacity: 0;

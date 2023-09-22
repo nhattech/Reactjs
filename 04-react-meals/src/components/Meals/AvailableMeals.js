@@ -6,15 +6,20 @@ import { useEffect, useState } from 'react';
 const AvailableMeals = (props) => {
   const [mealsFetch, setMealsFectch] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [errorHttp, setErrorHttp] = useState(null);
 
   useEffect(() => {
-    fetch('https://react-http-e6eb6-default-rtdb.firebaseio.com/meals.json')
+    fetch('https://react-http-e6eb6-default-rtdb.firebaseio.com/meals.jso')
       .then((res) => {
         return res.json();
       })
       .then((data) => {
         setMealsFectch(data);
         setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        setErrorHttp(error.message);
       });
   }, []);
 
@@ -22,6 +27,14 @@ const AvailableMeals = (props) => {
     return (
       <section className={classes.loading}>
         <p>Loading...</p>
+      </section>
+    );
+  }
+
+  if (errorHttp) {
+    return (
+      <section className={classes.error}>
+        <p>{errorHttp}</p>
       </section>
     );
   }
