@@ -9,7 +9,7 @@ const AvailableMeals = (props) => {
   const [errorHttp, setErrorHttp] = useState(null);
 
   useEffect(() => {
-    fetch('https://react-http-e6eb6-default-rtdb.firebaseio.com/meals.jso')
+    fetch('https://react-http-e6eb6-default-rtdb.firebaseio.com/meals.json')
       .then((res) => {
         return res.json();
       })
