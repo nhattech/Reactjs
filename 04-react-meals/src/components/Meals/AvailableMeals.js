@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 
 const AvailableMeals = (props) => {
   const [mealsFetch, setMealsFectch] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     fetch('https://react-http-e6eb6-default-rtdb.firebaseio.com/meals.json')
       .then((res) => {
@@ -12,8 +14,17 @@ const AvailableMeals = (props) => {
       })
       .then((data) => {
         setMealsFectch(data);
+        setIsLoading(false);
       });
   }, []);
+
+  if (isLoading) {
+    return (
+      <section className={classes.loading}>
+        <p>Loading...</p>
+      </section>
+    );
+  }
 
   const mealsList = [];
   for (const key in mealsFetch) {
