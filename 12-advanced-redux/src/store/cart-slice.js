@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { uiActions } from './ui-slice';
-
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
@@ -37,57 +35,13 @@ const cartSlice = createSlice({
         existingItem.totalPrice = existingItem.totalPrice - existingItem.price;
       }
     },
+    replaceCart(state, action) {
+      state.items = action.payload.items;
+      state.totalQuantity = action.payload.totalQuantity;
+    },
   },
 });
 
 export const cartActions = cartSlice.actions;
 
 export default cartSlice;
-
-//Using an Action Creator Thunk
-export const sendCartData = (cart) => {
-  return async (dispatch) => {
-    dispatch(
-      uiActions.showNotification({
-        status: 'sending',
-        title: 'Sending...',
-        message: 'Sending cart data.',
-      })
-    );
-
-    const sendRequest = async () => {
-      const response = await fetch(
-        'https://react-http-e6eb6-default-rtdb.firebaseio.com/cart.json',
-        {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(cart),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('Sending cart data failed.');
-      }
-    };
-
-    try {
-      await sendRequest();
-      dispatch(
-        uiActions.showNotification({
-          status: 'success',
-          title: 'Susscess!',
-          message: 'Sent cart data successfully.',
-        })
-      );
-    } catch (error) {
-      dispatch(
-        uiActions.showNotification({
-          status: 'error',
-          title: 'Error...',
-          message: error.message,
-        })
-      );
-    }
-  };
-};
-
