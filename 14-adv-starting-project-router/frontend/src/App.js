@@ -23,7 +23,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import HomePage from './pages/Home';
 import EditEventPage from './pages/EditEvent';
 import EventDetailPage from './pages/EventDetail';
-import EventsPage from './pages/Events';
+import EventsPage, { eventLoader } from './pages/Events';
 import NewEventPage from './pages/NewEvent';
 import RootLayout from './pages/Root';
 import EventRoot from './pages/EventRoot';
@@ -41,15 +41,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <EventsPage />,
-            loader: async () => {
-              const response = await fetch('http://localhost:8080/events');
-
-              if (!response.ok) {
-              } else {
-                const resData = await response.json();
-                return resData.events;
-              }
-            },
+            loader: eventLoader,
           },
           { path: ':eventId', element: <EventDetailPage /> },
           { path: 'new', element: <NewEventPage /> },
