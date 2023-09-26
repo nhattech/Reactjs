@@ -15,6 +15,7 @@ export const eventLoader = async () => {
   const response = await fetch('http://localhost:8080/events');
 
   if (!response.ok) {
+    throw new Error('Could not fetch events.');
   } else {
     return response;
   }
