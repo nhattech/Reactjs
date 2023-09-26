@@ -11,11 +11,11 @@ const Products = () => {
   return (
     <>
       <h1>Products Page</h1>
-      <Link to={'/'}>Back to the Home Page</Link>
+      <Link to={'/'}>Go to the Home Page</Link>
       <ul>
         {PRODUCTS.map((product) => (
           <li key={product.id}>
-            <Link to={`/products/${product.id}`}>{product.title}</Link>
+            <Link to={product.id}>{product.title}</Link>
           </li>
         ))}
       </ul>
