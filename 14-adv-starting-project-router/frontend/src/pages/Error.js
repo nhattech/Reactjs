@@ -5,9 +5,10 @@ import MainNavigation from '../components/MainNavigation';
 function ErrorPage() {
   const error = useRouteError();
   let title = 'An error occurred';
-  let message = 'Something went wrong...';
+  let message = error.message || 'Something went wrong...';
 
   if (error.status === 500) {
+    title += ': ' + error.status;
     message = error.data.message;
   }
 
