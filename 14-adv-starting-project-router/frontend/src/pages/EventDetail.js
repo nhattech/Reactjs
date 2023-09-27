@@ -22,7 +22,7 @@ export const loader = async ({ request, params }) => {
 export const action = async ({ request, params }) => {
   const id = params.eventId;
 
-  const response = await fetch('http://localhost:8080/events' + id, {
+  const response = await fetch('http://localhost:8080/events/' + id, {
     method: request.method,
   });
 
