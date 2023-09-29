@@ -27,7 +27,7 @@ export const action = async ({ request, params }) => {
   });
 
   if (response.status === 422 || response.status === 401) {
-    throw response;
+    return response;
   }
 
   if (!response.ok) {
