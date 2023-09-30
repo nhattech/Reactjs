@@ -1,5 +1,6 @@
 import { json, redirect } from 'react-router-dom';
 import AuthForm from '../components/AuthForm';
+import { setAuthToken } from '../util/auth';
 
 function AuthenticationPage() {
   return <AuthForm />;
@@ -34,6 +35,9 @@ export const action = async ({ request, params }) => {
     throw json({ message: 'Could not fetch' });
   }
 
-  //return jwt
+  const resData = await response.json();
+
+  const token = resData.token;
+  setAuthToken(token);
   return redirect('/');
 };
