@@ -9,6 +9,8 @@ export default function NewEventsSection() {
   const { data, isPending, isError, error } = useQuery({
     queryKey: ['event'],
     queryFn: fetchEvents,
+    staleTime: 0,//default: 0 milisecond
+    // gcTime: default 300000,
   });
 
   let content;
