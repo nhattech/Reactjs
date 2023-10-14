@@ -15,7 +15,7 @@ export default function Modal({ title, children, onClose }) {
         initial={'hidden'}
         animate={'visible'}
         exit={'hidden'}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.5 }}
         open
         className="modal"
       >

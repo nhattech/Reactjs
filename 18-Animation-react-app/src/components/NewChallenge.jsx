@@ -57,12 +57,21 @@ export default function NewChallenge({ onDone }) {
           <input ref={deadline} type="date" name="deadline" id="deadline" />
         </p>
 
-        <ul id="new-challenge-images">
+        <motion.ul
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.5,
+              },
+            },
+          }}
+          id="new-challenge-images"
+        >
           {images.map((image) => (
             <motion.li
               variants={{
-                hidden: { y: 100, opacity: 0 },
-                visible: { y: 0, opacity: 1 },
+                hidden: { y: 100, opacity: 0, scale: 0.5 },
+                visible: { y: 0, opacity: 1, scale: [0.8, 1.3, 1] },
               }}
               transition={{ type: 'spring' }}
               exit={{ y: 0, opacity: 1 }}
@@ -73,7 +82,7 @@ export default function NewChallenge({ onDone }) {
               <img {...image} />
             </motion.li>
           ))}
-        </ul>
+        </motion.ul>
 
         <p className="new-challenge-actions">
           <button type="button" onClick={onDone}>
